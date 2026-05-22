@@ -10,6 +10,7 @@
   --bg:#0f1117; --surface:#1a1d27; --s2:#22263a; --border:#2e3350;
   --accent:#f97316; --accent2:#6366f1; --green:#22c55e; --red:#ef4444;
   --yellow:#eab308; --text:#e2e8f0; --muted:#64748b; --r:14px;
+  --rose:#f472b6; --violet:#a78bfa;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
@@ -246,6 +247,60 @@ input[type=number]:focus{border-color:var(--accent)}
 .hist-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted);line-height:1.8}
 .hist-card.open .hist-detail{display:block}
 .dur-input{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:8px;font-size:.85rem;width:80px;text-align:center}
+
+/* ── PEAU (Routine Skincare) ──────────────────── */
+.skin-page{display:none}.skin-page.active{display:block}
+.skin-tabs{display:flex;gap:3px;margin-bottom:18px;background:var(--s2);border-radius:10px;padding:4px}
+.skin-tab{flex:1;background:none;border:none;color:var(--muted);cursor:pointer;padding:8px 6px;border-radius:8px;font-size:.75rem;font-weight:600;transition:all .15s;text-align:center;white-space:nowrap}
+.skin-tab.active{background:rgba(244,114,182,.15);color:var(--rose)}
+.streak{display:inline-flex;align-items:center;gap:6px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);color:var(--yellow);padding:5px 12px;border-radius:20px;font-size:.78rem;font-weight:700;margin-top:10px}
+.card-title{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-title span{font-size:1rem}
+.routine-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(46,51,80,.6);cursor:pointer;transition:opacity .15s}
+.routine-item:last-child{border:none}
+.routine-item.checked{opacity:.5}
+.ri-check{width:22px;height:22px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.routine-item.checked .ri-check{background:var(--green);border-color:var(--green)}
+.ri-body{flex:1}
+.ri-name{font-weight:600;font-size:.88rem}
+.ri-note{font-size:.72rem;color:var(--muted);margin-top:2px;line-height:1.4}
+.ri-badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.65rem;font-weight:700;margin-top:4px}
+.badge-rose{background:rgba(244,114,182,.12);color:var(--rose)}
+.badge-violet{background:rgba(167,139,250,.12);color:var(--violet)}
+.badge-blue-skin{background:rgba(96,165,250,.12);color:#60a5fa}
+.badge-green-skin{background:rgba(52,211,153,.12);color:#34d399}
+.skin-timer-card{background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(96,165,250,.1));border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:14px;margin-top:8px;text-align:center}
+.skin-timer-display{font-size:2rem;font-weight:800;color:var(--violet);font-variant-numeric:tabular-nums}
+.skin-timer-label{font-size:.75rem;color:var(--muted);margin-top:2px}
+.skin-timer-btn{background:var(--violet);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;margin-top:8px}
+.skin-timer-btn:hover{opacity:.9}
+.rating-section{margin-bottom:16px}
+.rating-label{font-size:.82rem;font-weight:600;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.rating-val{font-size:1.1rem;font-weight:800;color:var(--rose)}
+.rating-track{display:flex;gap:4px}
+.rating-dot{flex:1;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--s2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--muted);transition:all .15s}
+.rating-dot:hover{border-color:var(--rose);color:var(--rose)}
+.rating-dot.on{border-color:transparent;color:#fff}
+#page-peau .save-btn{background:linear-gradient(135deg,var(--rose),var(--violet))}
+#page-peau .save-btn:hover{opacity:.9;background:linear-gradient(135deg,var(--rose),var(--violet))}
+.skin-kpi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.skin-kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.skin-kpi-val{font-size:1.5rem;font-weight:800;line-height:1}
+.skin-kpi-lbl{font-size:.65rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.skin-advice{border-radius:12px;padding:14px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start;font-size:.82rem;line-height:1.6}
+.skin-adv-green{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:#34d399}
+.skin-adv-yellow{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);color:var(--yellow)}
+.skin-adv-rose{background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.2);color:var(--rose)}
+.skin-hist-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid rgba(46,51,80,.5);gap:10px}
+.skin-hist-row:last-child{border:none}
+.skin-score-chip{padding:2px 8px;border-radius:6px;font-weight:700;font-size:.75rem}
+#page-peau textarea{background:var(--s2);border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px;font-size:.82rem;width:100%;resize:none;line-height:1.6;font-family:inherit;outline:none;margin-top:6px}
+#page-peau textarea:focus{border-color:var(--rose)}
+#page-peau textarea::placeholder{color:var(--muted)}
+.skin-empty{text-align:center;padding:32px 20px;color:var(--muted);font-size:.85rem;line-height:1.7}
+.skin-section-title{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:20px 0 10px}
+.skin-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--green);color:var(--green);padding:10px 20px;border-radius:10px;font-size:.82rem;z-index:300;animation:fadeUp .3s ease;white-space:nowrap}
+@keyframes fadeUp{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%)}}
 </style>
 </head>
 <body>
@@ -262,6 +317,7 @@ input[type=number]:focus{border-color:var(--accent)}
     <button class="tab" data-page="strategy">Course</button>
     <button class="tab" data-page="health">Santé</button>
     <button class="tab" data-page="gym">Gym</button>
+    <button class="tab" data-page="peau">Peau</button>
   </div>
   <button class="sync-btn" id="sync-btn" onclick="syncData()">
     <svg class="spin" id="sync-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4v5h5M20 20v-5h-5M20 9A9 9 0 005.64 5.64M4 15a9 9 0 0014.36 3.36"/></svg>
@@ -294,6 +350,10 @@ input[type=number]:focus{border-color:var(--accent)}
   <button data-page="gym">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
     Gym
+  </button>
+  <button data-page="peau">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    Peau
   </button>
 </div>
 
@@ -596,6 +656,120 @@ input[type=number]:focus{border-color:var(--accent)}
     <div class="ct">Historique des séances</div>
     <div id="gym-history"></div>
   </div>
+</div>
+
+<!-- ══ PEAU ════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-peau">
+
+  <!-- Sous-navigation -->
+  <div class="skin-tabs">
+    <button class="skin-tab active" data-skin="today">Aujourd'hui</button>
+    <button class="skin-tab" data-skin="progress">Progrès</button>
+    <button class="skin-tab" data-skin="history">Historique</button>
+    <button class="skin-tab" data-skin="products">Produits</button>
+  </div>
+
+  <!-- ─── Aujourd'hui ────────────────────────────── -->
+  <div class="skin-page active" id="skin-today">
+
+    <div class="hero" style="background:linear-gradient(135deg,rgba(244,114,182,.1),rgba(167,139,250,.1));border-color:rgba(244,114,182,.2);margin-bottom:18px">
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:4px" id="skin-hero-date">—</div>
+      <h1 id="skin-hero-greeting" style="font-size:1.3rem;font-weight:800;color:var(--text)">Bonjour ☀️</h1>
+      <div class="streak" id="skin-streak-badge">🔥 0 jour consécutif</div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title"><span>🌅</span> Routine Matin <span id="skin-matin-pct" style="margin-left:auto;font-size:.85rem;font-weight:700;color:var(--green)"></span></div>
+      <div id="skin-matin-list"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title"><span>🌙</span> Routine Soir <span id="skin-soir-pct" style="margin-left:auto;font-size:.85rem;font-weight:700;color:var(--violet)"></span></div>
+      <div id="skin-soir-list"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title"><span>📊</span> Comment va ta peau aujourd'hui ?</div>
+
+      <div class="rating-section">
+        <div class="rating-label">Gonflement <span class="rating-val" id="val-gonflement">—</span></div>
+        <div class="rating-track" id="track-gonflement"></div>
+      </div>
+      <div class="rating-section">
+        <div class="rating-label">Imperfections / boutons <span class="rating-val" id="val-imperfections">—</span></div>
+        <div class="rating-track" id="track-imperfections"></div>
+      </div>
+      <div class="rating-section">
+        <div class="rating-label">Texture de la peau <span class="rating-val" id="val-texture">—</span></div>
+        <div class="rating-track" id="track-texture"></div>
+      </div>
+      <div class="rating-section">
+        <div class="rating-label">Cicatrisation <span class="rating-val" id="val-cicatrisation">—</span></div>
+        <div class="rating-track" id="track-cicatrisation"></div>
+      </div>
+
+      <div style="margin-bottom:12px">
+        <label style="font-size:.78rem;color:var(--muted)">Note libre (optionnel)</label>
+        <textarea id="skin-note-libre" rows="2" placeholder="Réaction à l'Epiduo ? Nouvelles imperfections ? Effet du zinc ?"></textarea>
+      </div>
+
+      <button class="save-btn" onclick="skinSaveDay()">💾 Enregistrer ma journée</button>
+    </div>
+
+  </div>
+
+  <!-- ─── Progrès ─────────────────────────────────── -->
+  <div class="skin-page" id="skin-progress">
+
+    <div class="skin-kpi-grid" id="skin-kpi-grid"></div>
+    <div id="skin-advice-section"></div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title"><span>📈</span> Évolution (30 derniers jours)</div>
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" id="skin-metric-selector"></div>
+      <div class="chart-wrap"><canvas id="skin-chartProgress"></canvas></div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title"><span>✓</span> Assiduité routine</div>
+      <div class="chart-wrap" style="height:160px"><canvas id="skin-chartRoutine"></canvas></div>
+    </div>
+
+  </div>
+
+  <!-- ─── Historique ──────────────────────────────── -->
+  <div class="skin-page" id="skin-history">
+    <div id="skin-history-list"></div>
+  </div>
+
+  <!-- ─── Produits ───────────────────────────────── -->
+  <div class="skin-page" id="skin-products">
+
+    <div class="skin-section-title">Ta routine complète</div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title"><span>🌅</span> Matin</div>
+      <div id="skin-products-matin"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title"><span>🌙</span> Soir</div>
+      <div id="skin-products-soir"></div>
+    </div>
+
+    <div class="card" style="background:linear-gradient(135deg,rgba(244,114,182,.06),rgba(167,139,250,.06));border-color:rgba(167,139,250,.2);margin-bottom:14px">
+      <div class="card-title"><span>💡</span> Rappels importants</div>
+      <div style="font-size:.82rem;line-height:1.8;color:var(--text)">
+        <p>⏱️ <strong>Epiduo</strong> — laisser sécher <strong>10–15 min</strong> avant la suite</p>
+        <p>💧 L'Hyaluronic Acid s'applique sur peau <strong>légèrement humide</strong></p>
+        <p>☀️ Le SPF 50 est <strong>indispensable</strong> le matin avec l'Epiduo</p>
+        <p>🌙 Attendre <strong>1 minute</strong> après le sérum avant le Lipikar</p>
+        <p>💊 Le zinc se prend de préférence <strong>au repas</strong> pour éviter les nausées</p>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 </main>
@@ -1577,6 +1751,7 @@ async function init() {
   renderHealth();
   renderGym();
   buildLogExercises('A');
+  skinInit();
 
   // Handle OAuth callback
   if (window.location.search.includes('code=')) {
@@ -1638,6 +1813,421 @@ async function init() {
 }
 
 init();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SKIN ROUTINE — Routine Peau
+// ═══════════════════════════════════════════════════════════════════════════
+
+const SKIN_KEY = 'skin_routine_v1';
+
+const SKIN_ROUTINE = {
+  matin: [
+    { id:'m1', name:'Lavage eau froide', note:'Nettoie sans décaper', badge:'Nettoyage', bclass:'badge-blue-skin' },
+    { id:'m2', name:'Sérum Hyaluronic Acid', note:'The Ordinary — 2 gouttes sur peau humide', badge:'2 gouttes', bclass:'badge-violet' },
+    { id:'m3', name:'Lipikar Crème', note:'Hydratation légère', badge:'Hydratant', bclass:'badge-green-skin' },
+    { id:'m4', name:'SPF 50', note:"Indispensable avec l'Epiduo — même nuageux", badge:'Protection solaire', bclass:'badge-yellow' },
+  ],
+  soir: [
+    { id:'s1', name:'Nettoyage doux', note:'Démaquillant / eau micellaire + nettoyant doux', badge:'Nettoyage', bclass:'badge-blue-skin' },
+    { id:'s2', name:'Epiduo', note:'Comme prescrit — laisser sécher 10–15 min avant la suite', badge:'⏱️ 10-15 min', bclass:'badge-rose' },
+    { id:'s3', name:'Vaporiser eau thermale', note:'Légèrement — pour réhydrater avant le sérum', badge:'Hydratation', bclass:'badge-blue-skin' },
+    { id:'s4', name:'Sérum Hyaluronic Acid', note:'The Ordinary — 3 gouttes sur peau humide', badge:'3 gouttes', bclass:'badge-violet' },
+    { id:'s5', name:'Attendre 1 minute', note:'Laisser le sérum pénétrer avant d\'appliquer le baume', badge:'⏱️ 1 min', bclass:'badge-violet', timer: true },
+    { id:'s6', name:'Lipikar Baume', note:'Quantité généreuse — occlusion et réparation nocturne', badge:'Généreuse quantité', bclass:'badge-green-skin' },
+    { id:'s7', name:'Zinc (gélule)', note:'Dose fixe quotidienne — de préférence avec le repas', badge:'Supplément', bclass:'badge-yellow' },
+  ]
+};
+
+const SKIN_METRICS = [
+  { id:'gonflement',    label:'Gonflement',    color:'#f472b6' },
+  { id:'imperfections', label:'Imperfections',  color:'#a78bfa' },
+  { id:'texture',       label:'Texture',        color:'#34d399' },
+  { id:'cicatrisation', label:'Cicatrisation',  color:'#60a5fa' },
+];
+
+let skinActiveMetric = 'gonflement';
+let skinProgressChart = null, skinRoutineChart = null;
+let skinTimerInterval = null, skinTimerSeconds = 0, skinTimerRunning = false;
+let skinTodayChecked = { matin: {}, soir: {} };
+let skinTodayRatings = {};
+
+// Sous-navigation peau
+document.querySelectorAll('.skin-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const page = btn.dataset.skin;
+    document.querySelectorAll('.skin-page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.skin-tab').forEach(b => b.classList.remove('active'));
+    const target = document.getElementById('skin-' + page);
+    if (target) target.classList.add('active');
+    btn.classList.add('active');
+    if (page === 'progress') skinRenderProgress();
+    if (page === 'history') skinRenderHistory();
+    if (page === 'products') skinRenderProducts();
+  });
+});
+
+function skinGetLog() { return JSON.parse(localStorage.getItem(SKIN_KEY) || '[]'); }
+function skinSaveLog(log) { localStorage.setItem(SKIN_KEY, JSON.stringify(log)); }
+function skinTodayKey() { return new Date().toISOString().split('T')[0]; }
+function skinGetTodayEntry() {
+  return skinGetLog().find(e => e.date === skinTodayKey()) || null;
+}
+
+function skinStartTimer(seconds, containerId) {
+  const wrap = document.getElementById(containerId);
+  if (!wrap) return;
+  skinTimerSeconds = seconds;
+  skinTimerRunning = true;
+  if (skinTimerInterval) clearInterval(skinTimerInterval);
+  skinUpdateTimerDisplay(wrap, skinTimerSeconds, seconds);
+  skinTimerInterval = setInterval(() => {
+    skinTimerSeconds--;
+    skinUpdateTimerDisplay(wrap, skinTimerSeconds, seconds);
+    if (skinTimerSeconds <= 0) {
+      clearInterval(skinTimerInterval);
+      skinTimerRunning = false;
+      const disp = wrap.querySelector('.skin-timer-display');
+      const btn  = wrap.querySelector('.skin-timer-btn');
+      if (disp) disp.textContent = '✓ Terminé !';
+      if (btn)  btn.textContent  = 'Relancer';
+      skinToast('⏱️ Temps écoulé !');
+    }
+  }, 1000);
+}
+
+function skinUpdateTimerDisplay(wrap, remaining, total) {
+  const m = Math.floor(remaining / 60), s = remaining % 60;
+  const disp = wrap.querySelector('.skin-timer-display');
+  if (disp) disp.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function skinBuildRoutineList(type) {
+  const items = SKIN_ROUTINE[type];
+  const existing = skinGetTodayEntry();
+  const savedChecked = existing?.[type + '_checked'] || {};
+  skinTodayChecked[type] = { ...savedChecked };
+
+  const container = document.getElementById('skin-' + type + '-list');
+  if (!container) return;
+  container.innerHTML = items.map(item => `
+    <div class="routine-item ${savedChecked[item.id] ? 'checked' : ''}" id="skin-ri-${item.id}" onclick="skinToggleItem('${type}','${item.id}')">
+      <div class="ri-check">${savedChecked[item.id] ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}</div>
+      <div class="ri-body">
+        <div class="ri-name">${item.name}</div>
+        <div class="ri-note">${item.note}</div>
+        <span class="ri-badge ${item.bclass}">${item.badge}</span>
+        ${item.timer && type === 'soir' ? `
+          <div class="skin-timer-card" id="timer-${item.id}">
+            <div class="skin-timer-display">01:00</div>
+            <div class="skin-timer-label">Attendre 1 minute avant le Lipikar</div>
+            <button class="skin-timer-btn" onclick="event.stopPropagation();skinStartTimer(60,'timer-${item.id}')">▶ Démarrer</button>
+          </div>` : ''}
+        ${item.id === 's2' ? `
+          <div class="skin-timer-card" id="timer-epiduo" style="display:none">
+            <div class="skin-timer-display">10:00</div>
+            <div class="skin-timer-label">Séchage Epiduo — attendre avant la suite</div>
+            <button class="skin-timer-btn" onclick="event.stopPropagation();skinStartTimer(600,'timer-epiduo')">▶ Démarrer le timer</button>
+          </div>` : ''}
+      </div>
+    </div>`).join('');
+  skinUpdatePct(type);
+}
+
+function skinToggleItem(type, id) {
+  skinTodayChecked[type][id] = !skinTodayChecked[type][id];
+  const el = document.getElementById('skin-ri-' + id);
+  if (!el) return;
+  el.classList.toggle('checked', skinTodayChecked[type][id]);
+  el.querySelector('.ri-check').innerHTML = skinTodayChecked[type][id]
+    ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : '';
+  if (id === 's2') {
+    const t = document.getElementById('timer-epiduo');
+    if (t) t.style.display = skinTodayChecked[type][id] ? 'block' : 'none';
+  }
+  skinUpdatePct(type);
+  skinAutoSave();
+}
+
+function skinUpdatePct(type) {
+  const items = SKIN_ROUTINE[type];
+  const done = items.filter(i => skinTodayChecked[type][i.id]).length;
+  const el = document.getElementById('skin-' + type + '-pct');
+  if (el) el.textContent = done === items.length ? '✓ Complet !' : `${done}/${items.length}`;
+}
+
+function skinBuildRatingTrack(metricId) {
+  const existing = skinGetTodayEntry();
+  const savedVal = existing?.ratings?.[metricId] || 0;
+  skinTodayRatings[metricId] = savedVal;
+
+  const track = document.getElementById('track-' + metricId);
+  const val   = document.getElementById('val-'   + metricId);
+  if (!track) return;
+
+  const colors = {1:'#ef4444',2:'#f87171',3:'#fb923c',4:'#fbbf24',5:'#facc15',6:'#a3e635',7:'#4ade80',8:'#34d399',9:'#2dd4bf',10:'#60a5fa'};
+  track.innerHTML = Array.from({length:10}, (_, i) => {
+    const v = i + 1, on = savedVal === v;
+    return `<div class="rating-dot ${on?'on':''}" data-v="${v}" style="${on?`background:${colors[v]};border-color:${colors[v]}`:''}">
+      ${v}</div>`;
+  }).join('');
+
+  if (val) { val.textContent = savedVal || '—'; if (savedVal) val.style.color = colors[savedVal]; }
+
+  track.querySelectorAll('.rating-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const v = +dot.dataset.v;
+      skinTodayRatings[metricId] = v;
+      track.querySelectorAll('.rating-dot').forEach(d => {
+        const on = +d.dataset.v === v;
+        d.classList.toggle('on', on);
+        d.style.background  = on ? colors[v] : '';
+        d.style.borderColor = on ? colors[v] : '';
+      });
+      if (val) { val.textContent = v; val.style.color = colors[v]; }
+      skinAutoSave();
+    });
+  });
+}
+
+function skinAutoSave() {
+  const log   = skinGetLog();
+  const today = skinTodayKey();
+  const idx   = log.findIndex(e => e.date === today);
+  const note  = document.getElementById('skin-note-libre')?.value || '';
+  const entry = {
+    date: today,
+    matin_checked:  { ...skinTodayChecked.matin },
+    soir_checked:   { ...skinTodayChecked.soir },
+    matin_complete: SKIN_ROUTINE.matin.every(i => skinTodayChecked.matin[i.id]),
+    soir_complete:  SKIN_ROUTINE.soir.every(i => skinTodayChecked.soir[i.id]),
+    ratings: { ...skinTodayRatings },
+    note,
+  };
+  if (idx >= 0) log[idx] = entry; else log.unshift(entry);
+  skinSaveLog(log);
+}
+
+function skinSaveDay() {
+  skinAutoSave();
+  skinUpdateStreak();
+  skinToast('✓ Journée enregistrée !');
+}
+
+function skinCalcStreak() {
+  const log = skinGetLog();
+  let streak = 0;
+  const today = new Date();
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(today); d.setDate(d.getDate() - i);
+    const key   = d.toISOString().split('T')[0];
+    const entry = log.find(e => e.date === key);
+    if (entry && (entry.matin_complete || entry.soir_complete)) streak++;
+    else if (i > 0) break;
+  }
+  return streak;
+}
+
+function skinUpdateStreak() {
+  const s  = skinCalcStreak();
+  const el = document.getElementById('skin-streak-badge');
+  if (el) el.textContent = `🔥 ${s} jour${s > 1 ? 's' : ''} consécutif${s > 1 ? 's' : ''}`;
+}
+
+function skinRenderProgress() {
+  const log   = skinGetLog().slice(0, 30);
+  const last7 = log.slice(0, 7);
+  const getAvg = (metric, data) => {
+    const vals = data.filter(e => e.ratings?.[metric]).map(e => e.ratings[metric]);
+    return vals.length ? (vals.reduce((s, v) => s + v, 0) / vals.length).toFixed(1) : '—';
+  };
+  const completeDays = log.filter(e => e.matin_complete && e.soir_complete).length;
+  const streak = skinCalcStreak();
+
+  const kpiGrid = document.getElementById('skin-kpi-grid');
+  if (kpiGrid) kpiGrid.innerHTML = `
+    <div class="skin-kpi"><div class="skin-kpi-val" style="color:var(--yellow)">${streak}</div><div class="skin-kpi-lbl">🔥 Streak</div></div>
+    <div class="skin-kpi"><div class="skin-kpi-val" style="color:var(--green)">${completeDays}</div><div class="skin-kpi-lbl">✓ Jours complets</div></div>
+    <div class="skin-kpi"><div class="skin-kpi-val" style="color:var(--rose)">${getAvg('gonflement', last7)}</div><div class="skin-kpi-lbl">Gonflement /10</div></div>
+  `;
+
+  skinBuildAdvice(log);
+
+  const metSel = document.getElementById('skin-metric-selector');
+  if (metSel) metSel.innerHTML = SKIN_METRICS.map(m =>
+    `<button onclick="skinSetMetric('${m.id}')" style="background:${skinActiveMetric===m.id ? m.color+'22' : 'var(--s2)'};border:1px solid ${skinActiveMetric===m.id ? m.color : 'var(--border)'};color:${skinActiveMetric===m.id ? m.color : 'var(--muted)'};padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.75rem;font-weight:600">${m.label}</button>`
+  ).join('');
+
+  skinDrawProgressChart(log);
+  skinDrawRoutineChart(log);
+}
+
+function skinSetMetric(id) {
+  skinActiveMetric = id;
+  skinRenderProgress();
+}
+
+function skinDrawProgressChart(log) {
+  const sorted = [...log].reverse();
+  const metric = SKIN_METRICS.find(m => m.id === skinActiveMetric);
+  if (skinProgressChart) { skinProgressChart.destroy(); skinProgressChart = null; }
+  const canvas = document.getElementById('skin-chartProgress');
+  if (!canvas) return;
+  skinProgressChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: sorted.map(e => e.date.slice(5)),
+      datasets: [{
+        label: metric.label,
+        data: sorted.map(e => e.ratings?.[skinActiveMetric] || null),
+        borderColor: metric.color, backgroundColor: metric.color + '15',
+        fill: true, tension: 0.3, pointBackgroundColor: metric.color, pointRadius: 4, spanGaps: false,
+      }, {
+        label: 'Objectif (≤3)', data: sorted.map(() => 3),
+        borderColor: 'rgba(52,211,153,.3)', borderDash: [5,4], pointRadius: 0, fill: false,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#64748b', font: { size: 10 }, boxWidth: 12 } } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,.03)' }, ticks: { color: '#64748b', font: { size: 9 }, maxRotation: 45 } },
+        y: { grid: { color: 'rgba(255,255,255,.03)' }, ticks: { color: '#64748b', font: { size: 10 } }, min: 0, max: 10, reverse: true }
+      }
+    }
+  });
+}
+
+function skinDrawRoutineChart(log) {
+  const sorted = [...log].reverse().slice(-14);
+  if (skinRoutineChart) { skinRoutineChart.destroy(); skinRoutineChart = null; }
+  const canvas = document.getElementById('skin-chartRoutine');
+  if (!canvas) return;
+  skinRoutineChart = new Chart(canvas.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: sorted.map(e => e.date.slice(5)),
+      datasets: [
+        { label: 'Matin', data: sorted.map(e => e.matin_complete ? 1 : 0), backgroundColor: 'rgba(251,191,36,.7)', borderRadius: 4 },
+        { label: 'Soir',  data: sorted.map(e => e.soir_complete  ? 1 : 0), backgroundColor: 'rgba(167,139,250,.7)', borderRadius: 4 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#64748b', font: { size: 10 }, boxWidth: 12 } } },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { color: '#64748b', font: { size: 9 } } },
+        y: { stacked: true, grid: { display: false }, display: false, max: 2 }
+      }
+    }
+  });
+}
+
+function skinBuildAdvice(log) {
+  const advices = [];
+  const last7 = log.slice(0, 7);
+  const getM = (m, data) => {
+    const v = data.filter(e => e.ratings?.[m]).map(e => e.ratings[m]);
+    return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null;
+  };
+  const gonf  = getM('gonflement', last7);
+  const imper = getM('imperfections', last7);
+  const ok7   = last7.filter(e => e.matin_complete && e.soir_complete).length;
+
+  if (ok7 >= 6)      advices.push({ cls:'skin-adv-green',  icon:'🏆', msg:'Excellente régularité ('+ok7+'/7 jours complets). La constance est la clé — continue !' });
+  else if (ok7 <= 3) advices.push({ cls:'skin-adv-yellow', icon:'⚠️', msg:'Seulement '+ok7+'/7 jours de routine complète. L\'Epiduo ne fonctionne que si tu es régulier.' });
+
+  if (gonf !== null && gonf <= 3)  advices.push({ cls:'skin-adv-green', icon:'✨', msg:'Gonflement bien contrôlé (moy. '+gonf.toFixed(1)+'/10). L\'Hyaluronic Acid et le Lipikar font leur travail.' });
+  else if (gonf !== null && gonf >= 7) advices.push({ cls:'skin-adv-rose', icon:'💧', msg:'Gonflement élevé (moy. '+gonf.toFixed(1)+'/10). Vérifie ta quantité de sel, ton sommeil et ta consommation d\'eau.' });
+
+  if (imper !== null && imper <= 4) advices.push({ cls:'skin-adv-green',  icon:'🌟', msg:'Imperfections en baisse (moy. '+imper.toFixed(1)+'/10). L\'Epiduo + zinc font effet.' });
+  else if (imper !== null && imper >= 7) advices.push({ cls:'skin-adv-yellow', icon:'💊', msg:'Imperfections encore élevées. Si ça dure +4 semaines, reparle à ton dermato.' });
+
+  if (log.length >= 14) {
+    const first7 = log.slice(-7);
+    const oldG = getM('gonflement', first7);
+    if (oldG && gonf && gonf < oldG) {
+      advices.push({ cls:'skin-adv-green', icon:'📉', msg:`Gonflement réduit de ${Math.round((oldG-gonf)/oldG*100)}% depuis le début. Excellente progression !` });
+    }
+  }
+  if (!advices.length) advices.push({ cls:'skin-adv-yellow', icon:'📊', msg:'Continue ta routine et note ta peau chaque jour — les conseils personnalisés apparaîtront après quelques jours.' });
+
+  const el = document.getElementById('skin-advice-section');
+  if (el) el.innerHTML = advices.map(a =>
+    `<div class="skin-advice ${a.cls}"><span style="font-size:1.1rem">${a.icon}</span><span>${a.msg}</span></div>`).join('');
+}
+
+function skinRenderHistory() {
+  const log = skinGetLog();
+  const el  = document.getElementById('skin-history-list');
+  if (!el) return;
+  if (!log.length) {
+    el.innerHTML = `<div class="skin-empty">📅 Aucune donnée pour l'instant.<br>Commence ta routine et enregistre ta première journée !</div>`;
+    return;
+  }
+  const colors = {1:'#ef4444',2:'#f87171',3:'#fb923c',4:'#fbbf24',5:'#facc15',6:'#a3e635',7:'#4ade80',8:'#34d399',9:'#2dd4bf',10:'#60a5fa'};
+  el.innerHTML = `<div class="skin-section-title">${log.length} jour${log.length > 1 ? 's' : ''} enregistré${log.length > 1 ? 's' : ''}</div>` +
+    log.map(e => {
+      const rats = e.ratings || {};
+      return `<div class="skin-hist-row">
+        <div style="font-size:.75rem;color:var(--muted);min-width:85px">${e.date}</div>
+        <div style="display:flex;gap:6px;flex:1;flex-wrap:wrap">
+          ${e.matin_complete ? '<span class="ri-badge badge-yellow">🌅 ✓</span>' : '<span class="ri-badge" style="background:rgba(239,68,68,.1);color:#f87171">🌅 ✗</span>'}
+          ${e.soir_complete  ? '<span class="ri-badge badge-violet">🌙 ✓</span>' : '<span class="ri-badge" style="background:rgba(239,68,68,.1);color:#f87171">🌙 ✗</span>'}
+        </div>
+        <div style="display:flex;gap:6px">
+          ${Object.entries(rats).map(([,v]) => `<span class="skin-score-chip" style="background:${colors[v]}22;color:${colors[v]}">${v}</span>`).join('')}
+        </div>
+      </div>`;
+    }).join('');
+}
+
+function skinRenderProducts() {
+  ['matin','soir'].forEach(type => {
+    const el = document.getElementById('skin-products-' + type);
+    if (!el) return;
+    el.innerHTML = SKIN_ROUTINE[type].map(item => `
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(46,51,80,.5)">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--rose);flex-shrink:0;margin-top:5px"></div>
+        <div>
+          <div style="font-weight:600;font-size:.88rem">${item.name}</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:2px;line-height:1.4">${item.note}</div>
+          <span class="ri-badge ${item.bclass}">${item.badge}</span>
+        </div>
+      </div>`).join('');
+  });
+}
+
+function skinToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'skin-toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+}
+
+function skinInit() {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' });
+  const heroDate = document.getElementById('skin-hero-date');
+  if (heroDate) heroDate.textContent = dateStr;
+
+  const h = now.getHours();
+  const greeting = h < 12 ? 'Bonjour ☀️' : h < 18 ? 'Bonne après-midi 🌿' : 'Bonsoir 🌙';
+  const heroGreeting = document.getElementById('skin-hero-greeting');
+  if (heroGreeting) heroGreeting.textContent = greeting;
+
+  skinBuildRoutineList('matin');
+  skinBuildRoutineList('soir');
+
+  const existing = skinGetTodayEntry();
+  const noteEl = document.getElementById('skin-note-libre');
+  if (noteEl) {
+    if (existing?.note) noteEl.value = existing.note;
+    noteEl.addEventListener('input', skinAutoSave);
+  }
+
+  SKIN_METRICS.forEach(m => skinBuildRatingTrack(m.id));
+  skinUpdateStreak();
+}
 </script>
 </body>
 </html>
