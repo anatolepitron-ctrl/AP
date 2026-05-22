@@ -808,11 +808,8 @@ async function getAccessToken() {
 }
 
 async function doRefresh(refresh_token) {
-  const res = await fetch('https://www.strava.com/oauth/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ client_id: CFG.client_id, client_secret: CFG.client_secret, grant_type: 'refresh_token', refresh_token }),
-  });
+  const body = new URLSearchParams({ client_id: CFG.client_id, client_secret: CFG.client_secret, grant_type: 'refresh_token', refresh_token });
+  const res = await fetch('https://www.strava.com/oauth/token', { method: 'POST', body });
   if (!res.ok) throw new Error('Refresh failed');
   const data = await res.json();
   localStorage.setItem(TOKEN_KEY, JSON.stringify(data));
@@ -825,11 +822,8 @@ async function handleOAuthCallback() {
   const code = params.get('code');
   if (!code) return false;
   setOverlay('Échange du token Strava…');
-  const res = await fetch('https://www.strava.com/oauth/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ client_id: CFG.client_id, client_secret: CFG.client_secret, code, grant_type: 'authorization_code' }),
-  });
+  const body = new URLSearchParams({ client_id: CFG.client_id, client_secret: CFG.client_secret, code, grant_type: 'authorization_code' });
+  const res = await fetch('https://www.strava.com/oauth/token', { method: 'POST', body });
   const data = await res.json();
   localStorage.setItem(TOKEN_KEY, JSON.stringify(data));
   // Clean URL
