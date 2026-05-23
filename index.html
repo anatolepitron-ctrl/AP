@@ -357,9 +357,9 @@ input[type=number]:focus{border-color:var(--accent)}
   </button>
 </div>
 
-<div class="overlay" id="overlay">
+<div class="overlay" id="overlay" style="display:none">
   <div class="spinner"></div>
-  <p id="overlay-msg">Connexion à Strava…</p>
+  <p id="overlay-msg">Chargement…</p>
 </div>
 
 <main>
@@ -1778,69 +1778,62 @@ function renderGym() {
 // INIT
 // ══════════════════════════════════════════════════════════════════════════════
 async function init() {
-  renderWeek();
-  renderStrategy();
-  renderHealth();
-  renderGym();
-  buildLogExercises('A');
-  skinInit();
+  // Render static sections (isolated — never block the Strava load)
+  try { renderWeek(); } catch(e) {}
+  try { renderStrategy(); } catch(e) {}
+  try { renderHealth(); } catch(e) {}
+  try { renderGym(); buildLogExercises('A'); } catch(e) {}
+  try { skinInit(); } catch(e) { console.warn('skinInit error:', e); }
 
-  // Handle OAuth callback
+  // Handle OAuth callback (code in URL)
   if (window.location.search.includes('code=')) {
-    await handleOAuthCallback();
+    try { await handleOAuthCallback(); } catch(e) {}
   }
 
-  // Try to load cached data first (instant display)
+  // Display cached activities immediately (no spinner)
   const cached = localStorage.getItem(DATA_KEY);
   if (cached) {
-    const acts = JSON.parse(cached);
-    hideOverlay();
-    renderDashboard(acts);
-    renderActivities(acts);
-
-    // Update athlete photo from stored token
     try {
-      const tokenData = JSON.parse(localStorage.getItem(TOKEN_KEY) || '{}');
-      if (tokenData?.athlete?.profile_medium) document.getElementById('athlete-photo').src = tokenData.athlete.profile_medium;
-      if (tokenData?.athlete?.firstname) document.getElementById('hero-name').textContent = `Bonjour ${tokenData.athlete.firstname} 👋`;
+      const acts = JSON.parse(cached);
+      renderDashboard(acts);
+      renderActivities(acts);
+      try {
+        const tok = JSON.parse(localStorage.getItem(TOKEN_KEY) || '{}');
+        if (tok?.athlete?.profile_medium) document.getElementById('athlete-photo').src = tok.athlete.profile_medium;
+        if (tok?.athlete?.firstname) document.getElementById('hero-name').textContent = `Bonjour ${tok.athlete.firstname} 👋`;
+      } catch(e) {}
     } catch(e) {}
   }
 
-  // Try live sync
+  // Background sync with Strava (silent — doesn't block display)
   try {
-    setOverlay(cached ? 'Mise à jour…' : 'Chargement des données Strava…');
     const token = await getAccessToken();
-
-    if (!cached) {
-      const raw = await fetchActivities(token);
+    const raw = await fetchActivities(token);
+    if (raw && raw.length) {
       const acts = transform(raw);
       localStorage.setItem(DATA_KEY, JSON.stringify(acts));
-
-      const tokenData = JSON.parse(localStorage.getItem(TOKEN_KEY) || '{}');
-      if (tokenData?.athlete?.profile_medium) document.getElementById('athlete-photo').src = tokenData.athlete.profile_medium;
-      if (tokenData?.athlete?.firstname) document.getElementById('hero-name').textContent = `Bonjour ${tokenData.athlete.firstname} 👋`;
-
-      hideOverlay();
       renderDashboard(acts);
       renderActivities(acts);
-    } else {
-      hideOverlay();
+      try {
+        const tok = JSON.parse(localStorage.getItem(TOKEN_KEY) || '{}');
+        if (tok?.athlete?.profile_medium) document.getElementById('athlete-photo').src = tok.athlete.profile_medium;
+        if (tok?.athlete?.firstname) document.getElementById('hero-name').textContent = `Bonjour ${tok.athlete.firstname} 👋`;
+      } catch(e) {}
     }
   } catch(e) {
-    hideOverlay();
+    console.warn('Strava sync failed (données cache utilisées):', e.message);
+    // If no cached data at all, show connect button
     if (!cached) {
-      // Show connect button
       document.getElementById('page-dashboard').innerHTML = `
         <div class="connect-card">
           <h2>Connecte ton compte Strava</h2>
-          <p>L'accès à tes données a expiré. Reconnecte-toi pour voir tes statistiques en temps réel.</p>
+          <p>Clique pour autoriser l'accès à tes activités.</p>
           <a class="strava-connect" href="${stravaAuthUrl()}">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
             Connecter Strava
           </a>
         </div>`;
     }
-    console.error(e);
   }
 }
 
