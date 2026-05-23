@@ -781,12 +781,32 @@ input[type=number]:focus{border-color:var(--accent)}
 const CFG = {
   client_id:     '245703',
   client_secret: '58a69ef5c6a95c26ff1fbacfd4bdcd40d24be413',
-  refresh_token: '7d5dec83c1d23f103de5be72bb841c5658908f8f', // token initial
+  refresh_token: '7d5dec83c1d23f103de5be72bb841c5658908f8f',
   scope:         'read,activity:read_all',
 };
 const GOAL_PACE = 240; // 4:00/km en secondes
 const TOKEN_KEY = 'run40_token_v2';
 const DATA_KEY  = 'run40_activities_v2';
+
+// Pré-population du token (seed valide 6h, refresh_token valide longtemps)
+(function seedToken() {
+  const SEED_EXP = 1779530702; // expiration du seed access_token
+  if (Date.now()/1000 >= SEED_EXP) return; // seed périmé, ne pas écraser un token valide
+  try {
+    const stored = JSON.parse(localStorage.getItem(TOKEN_KEY) || 'null');
+    if (!stored || stored.expires_at < Date.now()/1000 + 300) {
+      localStorage.setItem(TOKEN_KEY, JSON.stringify({
+        token_type: 'Bearer',
+        access_token: 'a44b3bbe3051f7445cc41326619869a0fd3060e7',
+        expires_at: SEED_EXP,
+        refresh_token: '7d5dec83c1d23f103de5be72bb841c5658908f8f',
+        scope: 'activity:read_all read',
+        athlete: {id:82225690,firstname:'Anatole',lastname:' Pitron',
+          profile_medium:'https://dgalywyr863hv.cloudfront.net/pictures/athletes/82225690/48707014/2/medium.jpg'}
+      }));
+    }
+  } catch(e) {}
+})();
 
 // ══════════════════════════════════════════════════════════════════════════════
 // STRAVA AUTH
