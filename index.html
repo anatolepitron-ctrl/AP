@@ -776,6 +776,17 @@ input[type=number]:focus{border-color:var(--accent)}
 
 <script>
 // ══════════════════════════════════════════════════════════════════════════════
+// SEED DATA (activités pré-chargées + token, mis à jour automatiquement)
+// ══════════════════════════════════════════════════════════════════════════════
+(function seedData() {
+  try {
+    if (!localStorage.getItem('run40_activities_v2')) {
+      localStorage.setItem('run40_activities_v2', JSON.stringify([{"id":18061158476,"name":"Course à pied du midi","date":"11 avr. 2026","dist":5.03,"time":25.9,"pace":309,"elev":66.4,"url":"https://www.strava.com/activities/18061158476"},{"id":17696947274,"name":"Course à pied le soir","date":"12 mars 2026","dist":13.13,"time":73.2,"pace":334,"elev":17.8,"url":"https://www.strava.com/activities/17696947274"},{"id":17381750089,"name":"Première","date":"13 févr. 2026","dist":5.22,"time":26.1,"pace":300,"elev":3.4,"url":"https://www.strava.com/activities/17381750089"},{"id":17716029410,"name":"Course à pied dans l'après-midi","date":"14 mars 2026","dist":6.1,"time":31.8,"pace":313,"elev":5.2,"url":"https://www.strava.com/activities/17716029410"},{"id":18517044961,"name":"Night Run","date":"15 mai 2026","dist":5.01,"time":23.4,"pace":280,"elev":264.2,"url":"https://www.strava.com/activities/18517044961"},{"id":17414877577,"name":"Course à pied le soir","date":"16 févr. 2026","dist":4.75,"time":23.6,"pace":299,"elev":4.6,"url":"https://www.strava.com/activities/17414877577"},{"id":17743023836,"name":"Course à pied de nuit","date":"16 mars 2026","dist":3.54,"time":17.1,"pace":290,"elev":0,"url":"https://www.strava.com/activities/17743023836"},{"id":18540935403,"name":"Evening Run","date":"17 mai 2026","dist":8.26,"time":45,"pace":327,"elev":12.6,"url":"https://www.strava.com/activities/18540935403"},{"id":18344455660,"name":"Course à pied le soir","date":"2 mai 2026","dist":10.01,"time":51.4,"pace":308,"elev":16.9,"url":"https://www.strava.com/activities/18344455660"},{"id":18576358929,"name":"Pluie","date":"20 mai 2026","dist":1.94,"time":9.3,"pace":288,"elev":106.7,"url":"https://www.strava.com/activities/18576358929"},{"id":17468621622,"name":"Course à pied dans l'après-midi","date":"21 févr. 2026","dist":3.74,"time":17.7,"pace":284,"elev":0,"url":"https://www.strava.com/activities/17468621622"},{"id":17814121830,"name":"Course à pied le soir","date":"22 mars 2026","dist":9.22,"time":47.9,"pace":311,"elev":5,"url":"https://www.strava.com/activities/17814121830"},{"id":18267400645,"name":"Tokyo by night","date":"26 avr. 2026","dist":4.71,"time":25.3,"pace":322,"elev":28.6,"url":"https://www.strava.com/activities/18267400645"},{"id":17864156690,"name":"Course à pied le soir","date":"26 mars 2026","dist":4.53,"time":20.6,"pace":272,"elev":0,"url":"https://www.strava.com/activities/17864156690"},{"id":17897067250,"name":"Ap running club","date":"29 mars 2026","dist":7.17,"time":43.7,"pace":366,"elev":17.3,"url":"https://www.strava.com/activities/17897067250"},{"id":18317741012,"name":"Course à pied le soir","date":"30 avr. 2026","dist":10.01,"time":56.9,"pace":341,"elev":18.4,"url":"https://www.strava.com/activities/18317741012"},{"id":18383556689,"name":"Course à pied le soir","date":"5 mai 2026","dist":1.92,"time":10.5,"pace":329,"elev":5.4,"url":"https://www.strava.com/activities/18383556689"}]));
+    }
+  } catch(e) {}
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
 // CONFIG
 // ══════════════════════════════════════════════════════════════════════════════
 const CFG = {
@@ -860,10 +871,17 @@ function stravaAuthUrl() {
 // ══════════════════════════════════════════════════════════════════════════════
 // STRAVA API
 // ══════════════════════════════════════════════════════════════════════════════
+async function fetchWithTimeout(url, opts, ms=10000) {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(), ms);
+  try { const r = await fetch(url, {...opts, signal: ctrl.signal}); return r; }
+  finally { clearTimeout(id); }
+}
+
 async function fetchActivities(token) {
   const runs = [];
   for (let page = 1; page <= 10; page++) {
-    const res = await fetch(`https://www.strava.com/api/v3/athlete/activities?per_page=100&page=${page}`, {
+    const res = await fetchWithTimeout(`https://www.strava.com/api/v3/athlete/activities?per_page=100&page=${page}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
